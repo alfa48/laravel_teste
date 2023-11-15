@@ -80,5 +80,7 @@
                 @endforeach
        
     </table>
-
+    <hr>
+    <h2>Pagamentos feitos pelos moradores do prédio: #</h2>
+    
 @endsection
