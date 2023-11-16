@@ -21,15 +21,12 @@
             </select>
 
             <select id="select-blocos" class="hidden" onchange="findPrediosViaAjax(this.value)"  name="n_codibloco">
-                <option value="" >Selecione bloco</option>            
             </select>
 
-            <select id="select-predios" class="hidden" onchange="findApartamentosViaAjax(this.value)" name="n_codipredi">
-                <option value="" >Selecione prédio</option>            
+            <select id="select-predios" class="hidden" onchange="findApartamentosSemViaAjax(this.value)" name="n_codipredi">
             </select>
 
             <select id="select-apartamentos" class="hidden" name="n_codiapart">
-                <option value="" >Selecione apartamento</option>            
             </select>
 
             <h3>Morador</h3>

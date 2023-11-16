@@ -18,6 +18,7 @@ class Divida extends Model
                             'n_prazdivid',
                             'n_vmuldivid',
                             'c_estadivid',
-                            'd_dacrdivid'
+                            'd_dacrdivid',
+                            'n_codicoord'
     ];
 }

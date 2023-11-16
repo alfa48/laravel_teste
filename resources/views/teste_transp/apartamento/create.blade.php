@@ -21,11 +21,9 @@
             </select>
 
             <select id="select-blocos" class="hidden" onchange="findPrediosViaAjax(this.value)"  name="n_codibloco">
-                <option value="" >Selecione o Bloco</option>            
-            </select>
+             </select>
 
-            <select id="select-predios" class="hidden" name="n_codipredi">
-                <option value="" >Selecione o Prédio</option>            
+            <select id="select-predios" class="hidden" name="n_codipredi">          
             </select>
 
             <h3>Apartamento</h3>

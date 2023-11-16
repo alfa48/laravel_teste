@@ -30,6 +30,7 @@ class PagamentoController extends Controller
         //TODO
 
         $dadosPagamento =[
+            'n_codicoord' => $request->input('n_codicoord'),
             'n_valopagam' => $request->input('n_valopagam'),
             'c_descpagam' => $request->input('c_descpagam'),
             'c_formpagam' => $request->input('c_formpagam'),

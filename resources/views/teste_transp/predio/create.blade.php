@@ -22,7 +22,6 @@
             </select>
             
             <select id="select-blocos" class="hidden" name="n_codibloco">
-                <option value="" >Selecione Bloco</option> 
             </select>
             
             <h3>Prédio</h3>

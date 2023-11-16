@@ -12,15 +12,26 @@ class CaixaController extends Controller
     {
         $caixa = [];
         $bancosCoord = [];
+        $pagamentosPredio = [];
         //dd('Miseravel como estás?');
         $centralidades = Centralidade::all();
         
         $idpredio = $request->query("n_codipredi");
+        
         //var_dump($idpredio);
         if ($idpredio != null) {
 
-            $idcaixa = DB::select('select n_codicaixa from trapredi where n_codipredi = ?', [0 => $idpredio]);
+
+            $predio = DB::select('select * from trapredi where n_codipredi = ?', [0 => $idpredio]);
+            $IDcaixa =  $predio[0]->n_codicaixa;
+            $IDcoord =  $predio[0]->n_codicoord;
+            var_dump($IDcaixa);
+            var_dump($IDcoord);
+
+
+            /*$idcaixa = DB::select('select n_codicaixa from trapredi where n_codipredi = ?', [0 => $idpredio]);
             $IDcaixa =  $idcaixa[0]->n_codicaixa;
+            */
             //var_dump($IDcaixa);
             //dd($idcaixa);
             $caixa =  DB::select('select * from tracaixa where n_codicaixa = ?', [$IDcaixa]);
@@ -29,46 +40,22 @@ class CaixaController extends Controller
             //$idCoordenador = DB::select('select n_codicoord from trapredi where n_codipredi = ?', [0 => $idpredio]);
             $bancosCoord = DB::select('select * from trabanco where n_codientid = ? and c_nomeentid = ? ', [0 => $idpredio, 1 =>'trapredi']);
            // var_dump($bancosCoord);
-            
+            $pagamentosPredio = DB::select('select * from trapagam where n_codicoord = ?', [0 => $IDcoord]);
+           //pegar os pagamentos feitos por moradores do predio
+
         }     
+
+        $codi_coord = $request->input("n_codicoord");
+        $codi_pagam = $request->input("n_codipagam");
+        if(!is_null($codi_coord) & !is_null($codi_pagam)){
+            //Confirmar pagamento
+            DB::select('update trapagam set n_estapagam = ?, n_codicoord = ? where n_codipagam = ?', [1, $codi_coord, $codi_pagam]);
+        }
  
 
         return view('teste_transp.caixa.index', ['caixa' => count($caixa) == 0 ? null : $caixa[0],
                                                 'centralidades'=>$centralidades,
-                                                'bancos' => $bancosCoord]);
+                                                'bancos' => $bancosCoord,
+                                                'pagamentosPredio' => $pagamentosPredio]);
     }
 }
-
-/*
-
-        <table>
-
-        <tr>
-            <th>ID pagamento</th>
-            <th>Descrição do pagamento</th>
-            <th>Valor</th>
-            <th>Forma de pagamento</th>
-            <th>Data de pagamento</th>
-            <th>Banco</th>
-            <th>Estado do pagamento</th>
-            <th>ID dívida</th>
-            <th>ID Apartamento</th>
-        </tr>
-    
-               @foreach ($pagamentos as $pagamento)
-                    <tr>
-                            <td>{{ $pagamento-> n_codipagam }}</td>
-                            <td>{{ $pagamento-> c_descpagam }}</td>
-                            <td>{{ $pagamento-> n_valopagam }}</td>
-                            <td>{{ $pagamento-> c_formpagam }}</td> 
-                            <td>{{ $pagamento-> d_datapagam }}</td>
-                            <td>{{ $pagamento-> c_bancpagam }}</td>
-                            <td>{{ $pagamento-> n_estapagam }}</td> 
-                            <td>{{ $pagamento-> n_codidivid }}</td>
-                            <td>{{ $pagamento-> n_codiapart }}</td>  
-                    </tr>            
-                @endforeach
-      
-    </table>
-
-*/

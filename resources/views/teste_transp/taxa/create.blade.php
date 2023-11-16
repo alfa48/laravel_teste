@@ -22,11 +22,9 @@
             </select>
 
             <select id="select-blocos" class="hidden" onchange="findPrediosViaAjax(this.value)"  name="n_codibloco">
-                <option value="" >Selecione o Bloco</option>            
             </select>
 
             <select id="select-predios" class="hidden" onchange="findCoordenadorPredioViaAjax(this.value)"  name="n_codipredi">
-                <option value="" >Selecione o Prédio</option>            
             </select>
 
             <h4>Taxa Para o prédio</h4>

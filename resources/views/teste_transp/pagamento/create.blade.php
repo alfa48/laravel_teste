@@ -24,15 +24,12 @@
             </select>
 
             <select id="select-blocos" class="hidden" onchange="findPrediosViaAjax(this.value)"  name="n_codibloco">
-                <option value="" >Selecione bloco</option>            
             </select>
 
-            <select id="select-predios" class="hidden" onchange="findApartamentosViaAjax(this.value)" name="n_codipredi">
-                <option value="" >Selecione prédio</option>            
+            <select id="select-predios" class="hidden" onchange="findApartamentosComViaAjax(this.value)" name="n_codipredi">
             </select>
 
             <select id="select-apartamentos" class="hidden" onchange="findDividasApartamentoViaAjax(this.value)" name="n_codiapart">
-                <option value="" >Selecione apartamento</option>            
             </select>
 
             <h4>Dividas do Apartamento#</h4>
@@ -49,6 +46,7 @@
         <th>Valor da Multa</th>
         <th>Data Para a contração da multa</th>
         <th>Conta do apartamento</th>
+        <th>ID do coordenador</th>
 
     </tr>
 
@@ -59,7 +57,7 @@
         @endforeach
         @else
             <tr>
-                <td colspan="9"></td>
+                <td colspan="10"></td>
             </tr>                   
     @endif
     
@@ -69,6 +67,7 @@
             <input type="date" name="d_datapagam" placeholder="data de pagamento"/>
             <input pattern="[0-9]+(\.[0-9]+)?" name="n_valopagam" placeholder="volor do pagamento" required>
             <input class="oculto" type="number" id="codidivida" name="n_codidivid" placeholder="ID da divida" required>
+            <input class="oculto" type="number" id="codicoordenador" name="n_codicoord" placeholder="ID do coordenador do prédio" required>
             
             <select name="c_formpagam" require>
                 <option value="cash">cash</option>
@@ -98,29 +97,5 @@
 
 </div>
 
-    
-  
-<script>
-    
-    function selectRow(row){
-        var inputElement = document.getElementById('codidivida');
-        var table = document.getElementById('tableDividas');
-        var rows = table.getElementsByTagName("tr");
-
-        for(var i = 0; i < rows.length;i++){
-            rows[i].classList.remove("selecionado");
-        }
-        console.log(row);
-        row.classList.add("selecionado");
-        var cells = row.getElementsByTagName('td');
-        var values = [];
-        for(var j = 0; j < cells.length; j++){
-            values.push(cells[j].innerText);
-        }
-        console.log(values[0]);
-        inputElement.setAttribute('value',values[0])
-    }
-
-</script>
 
 @endsection

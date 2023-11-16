@@ -62,7 +62,7 @@
         }
        .selecionado{
             background-color: yellowgreen;
-            font-size: 18px;
+            font-size: 15px;
             background-color: #4CAF50 /*#ccc #555 #f2f2f2*/;
         }
     </style>
@@ -146,23 +146,14 @@
             });       
          }
 
-         // pegar os apartamentos
+ // pegar os apartamentos
          function findApartamentosViaAjax(valor){ 
            console.log('olaá');
 
            const selectElement = document.getElementById('select-apartamentos');
            selectElement.innerHTML = "<option value='' >Selecione apartamento</option>"; 
            fetch('/findapartamentos?id='+valor,{
-              /*  
-                method:'post',
-                headers:{
-                    'Content-Type':'application/json',
-                    'X-CSRF-TOKEN':document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                },
-                body:JSON.stringify(arquivo)
-                */
-            }).then(response=>response.text()).then(data=>{
-                
+            }).then(response=>response.text()).then(data=>{       
                 //como trasformar string num objecto ou como receber um srrsy de objectos
                 console.log(data)
                 const objectos = JSON.parse(data);
@@ -175,7 +166,46 @@
                 });
             });       
          }
+         //Com moradores
+         function findApartamentosComViaAjax(valor){ 
+           console.log('olaá');
 
+           const selectElement = document.getElementById('select-apartamentos');
+           selectElement.innerHTML = "<option value='' >Selecione apartamento</option>"; 
+           fetch('/findapartamentoscommoradores?id='+valor,{
+            }).then(response=>response.text()).then(data=>{       
+                //como trasformar string num objecto ou como receber um srrsy de objectos
+                console.log(data)
+                const objectos = JSON.parse(data);
+
+                objectos.forEach((elemento)=>{
+                   const optionElement = document.createElement('option');
+                   optionElement.value = elemento.n_codiapart;
+                   optionElement.textContent = 'Porta '+ elemento.c_portapart;
+                   selectElement.appendChild(optionElement);
+                });
+            });       
+         }
+    //Sem moradores
+         function findApartamentosSemViaAjax(valor){ 
+           console.log('olaá');
+
+           const selectElement = document.getElementById('select-apartamentos');
+           selectElement.innerHTML = "<option value='' >Selecione apartamento</option>"; 
+           fetch('/findapartamentossemmoradores?id='+valor,{
+            }).then(response=>response.text()).then(data=>{       
+                //como trasformar string num objecto ou como receber um srrsy de objectos
+                console.log(data)
+                const objectos = JSON.parse(data);
+
+                objectos.forEach((elemento)=>{
+                   const optionElement = document.createElement('option');
+                   optionElement.value = elemento.n_codiapart;
+                   optionElement.textContent = 'Porta '+ elemento.c_portapart;
+                   selectElement.appendChild(optionElement);
+                });
+            });       
+         }
 
 // pegar os apartamentos
       function findCoordenadorPredioViaAjax(valor){ 
@@ -208,7 +238,7 @@
            /*apartamentos com dividas: predio 2(A-entrada B) bloco 7(C) centralidade 1(Cequuele) */
 
            const tableElement = document.getElementById('tableDividas');
-           tableElement.innerHTML = "<tr><th>ID dívida</th><th>Descrição da dívida</th><th>Valor a pagar</th><th>Estádo</th><th>Prázo em dias</th><th>Data da Criação</th><th>Valor da Multa</th><th>Data Para a contração da multa</th><th>Conta do apartamento</th></tr>";
+           tableElement.innerHTML = "<tr><th>ID dívida</th><th>Descrição da dívida</th><th>Valor a pagar</th><th>Estádo</th><th>Prázo em dias</th><th>Data da Criação</th><th>Valor da Multa</th><th>Data Para a contração da multa</th><th>Conta do apartamento</th></th><th>ID coordenador</th></tr>";
           
            fetch('/finddividasapartamentos?id='+valor,{
               /*  
@@ -272,12 +302,61 @@
                    tdElement9.textContent = elemento.n_codiconta;
                    trElement.appendChild(tdElement9);
 
+                   const tdElement10 = document.createElement('td');
+                   tdElement10.textContent = elemento.n_codicoord;
+                   trElement.appendChild(tdElement10);
+
                    tableElement.appendChild(trElement);
 
                 });
                 
              });       
          }
+
+//Seleciona dividas
+      function selectRow(row){
+        var inputElement = document.getElementById('codidivida');
+        var inputElement1 = document.getElementById('codicoordenador');
+        var table = document.getElementById('tableDividas');
+        var rows = table.getElementsByTagName("tr");
+
+        for(var i = 0; i < rows.length;i++){
+            rows[i].classList.remove("selecionado");
+        }
+        console.log(row);
+        row.classList.add("selecionado");
+        var cells = row.getElementsByTagName('td');
+        var values = [];
+        for(var j = 0; j < cells.length; j++){
+            values.push(cells[j].innerText);
+        }
+        console.log(values);
+        inputElement.setAttribute('value',values[0])
+        inputElement1.setAttribute('value',values[9])
+    }
+
+//Seleciona Pagamentos
+    function selectRowPagamento(row){
+        var inputElementPagamento = document.getElementById('pagamento');
+        var inputElementCoordenador = document.getElementById('coordenador');
+        var table = document.getElementById('tablePagamentos');
+        var rows = table.getElementsByTagName("tr");
+
+        for(var i = 0; i < rows.length;i++){
+            rows[i].classList.remove("selecionado");
+        }
+        row.classList.add("selecionado");
+
+        var cells = row.getElementsByTagName('td');
+        var values = [];
+        for(var j = 0; j < cells.length; j++){
+            values.push(cells[j].innerText);
+        }
+        console.log(values);
+        console.log(values[10]);
+         inputElementCoordenador.setAttribute('value',values[10])
+         inputElementPagamento.setAttribute('value',values[0])
+    }    
 
     </script>
 

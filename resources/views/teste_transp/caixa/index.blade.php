@@ -17,12 +17,10 @@
                 
             </select>
 
-            <select id="select-blocos" class="hidden" onchange="findPrediosViaAjax(this.value)"  name="n_codibloco">
-                <option value="" >Selecione o Bloco</option>            
+            <select id="select-blocos" class="hidden" onchange="findPrediosViaAjax(this.value)"  name="n_codibloco">            
             </select>
 
-            <select id="select-predios" class="hidden" name="n_codipredi">
-                <option value="" >Selecione o Prédio</option>            
+            <select id="select-predios" class="hidden" name="n_codipredi">            
             </select>
 
             <input type="submit" value="Pesquisar">
@@ -82,5 +80,46 @@
     </table>
     <hr>
     <h2>Pagamentos feitos pelos moradores do prédio: #</h2>
-    
+<table id="tablePagamentos">
+
+    <tr>
+        <th>ID pagamento</th>
+        <th>Descrição do pagamento</th>
+        <th>Valor</th>
+        <th>Forma de pagamento</th>
+        <th>Data de pagamento</th>
+        <th>Data de confirmação do pagamento</th>
+        <th>Banco</th>
+        <th>Estado do pagamento</th>
+        <th>ID dívida</th>
+        <th>ID Apartamento</th>
+        <th>ID Coordenador</th>
+    </tr>
+
+       @foreach ($pagamentosPredio as $pagamento)
+            <tr onclick="selectRowPagamento(this)">
+                    <td>{{ $pagamento-> n_codipagam }}</td>
+                    <td>{{ $pagamento-> c_descpagam }}</td>
+                    <td>{{ $pagamento-> n_valopagam }}</td>
+                    <td>{{ $pagamento-> c_formpagam }}</td> 
+                    <td>{{ $pagamento-> d_datapagam }}</td>
+                    <td>{{ $pagamento-> d_dacopagam }}</td>
+                    <td>{{ $pagamento-> c_bancpagam }}</td>
+                    <td>{{ $pagamento-> n_estapagam }}</td> 
+                    <td>{{ $pagamento-> n_codidivid }}</td>
+                    <td>{{ $pagamento-> n_codiapart }}</td>
+                    <td>{{ $pagamento-> n_codicoord }}</td>  
+            </tr>            
+        @endforeach
+
+</table>
+
+        <form action="{{ route('caixas-index') }}" method="get">
+            @csrf
+
+            <input type="number" class="oculto" value="" id="pagamento" name="n_codipagam" required>
+            <input type="number" class="oculto" value="" id="coordenador" name="n_codicoord" required>
+            <input type="submit" value="Confirmar Pagamento">
+        </form>
+
 @endsection

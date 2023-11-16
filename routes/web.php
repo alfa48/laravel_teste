@@ -121,7 +121,11 @@ Route::prefix('bancos')->group(function(){
 Route::get('/findblocos', [UtilController::class, 'findBlocos']);
 Route::get('/findpredios', [UtilController::class, 'findPredios']);
 Route::get('/findprediocoordenador', [UtilController::class, 'findPredioCoordenador']);
+
 Route::get('/findapartamentos', [UtilController::class, 'findApartamenos']);
+Route::get('/findapartamentossemmoradores', [UtilController::class, 'findApartamenoSemMoradores']);
+Route::get('/findapartamentoscommoradores', [UtilController::class, 'findApartamenosComMoradores']);
+
 Route::get('/finddividasapartamentos', [UtilController::class, 'findDividasApartamenos']);
 
 
