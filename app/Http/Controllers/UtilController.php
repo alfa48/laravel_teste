@@ -112,5 +112,11 @@ class UtilController extends Controller
             //return err->getMessage();
         }                
     }
+    public function findCoordenadorPredio(Request $request){
+        $id = $request->query('id');//n_codipredi
+        $codicoord = DB::select('select n_codicoord from trapredi where n_codipredi = ?', [$id]);
+        //var_dump($blocos);
+        return $codicoord;   
+    }
 
 }

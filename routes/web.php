@@ -6,6 +6,7 @@ use App\Http\Controllers\BlocoController;
 use App\Http\Controllers\CaixaController;
 use App\Http\Controllers\CentralidadeController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\DespesaController;
 use App\Http\Controllers\JogosController;
 use App\Http\Controllers\MoradorController;
 use App\Http\Controllers\PagamentoController;
@@ -111,6 +112,11 @@ Route::prefix('caixas')->group(function(){
     Route::get('/',[CaixaController::class, 'index'])->name('caixas-index');
 });
 
+/* DESPESAS */
+Route::prefix('despesas')->group(function(){
+    Route::get('/',[DespesaController::class, 'index'])->name('despesas-index');
+});
+
 /* BANCO */
 Route::prefix('bancos')->group(function(){
     Route::get('/',[BancoController::class, 'index'])->name('bancos-index');
@@ -127,6 +133,8 @@ Route::get('/findapartamentossemmoradores', [UtilController::class, 'findApartam
 Route::get('/findapartamentoscommoradores', [UtilController::class, 'findApartamenosComMoradores']);
 
 Route::get('/finddividasapartamentos', [UtilController::class, 'findDividasApartamenos']);
+
+Route::get('/findcoordenador', [UtilController::class, 'findCoordenadorPredio']);
 
 
 

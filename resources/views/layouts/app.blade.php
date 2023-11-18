@@ -60,6 +60,9 @@
         .oculto{
             display: none;
         }
+       /* .form_despesa{
+            display: none;
+        }*/
        .selecionado{
             background-color: yellowgreen;
             font-size: 15px;
@@ -143,7 +146,7 @@
                    optionElement.textContent = elemento.c_descpredi+' Entrada '+elemento.c_entrpredi;
                    selectElement.appendChild(optionElement);
                 });
-            });       
+            });
          }
 
  // pegar os apartamentos
@@ -356,8 +359,59 @@
         console.log(values[10]);
          inputElementCoordenador.setAttribute('value',values[10])
          inputElementPagamento.setAttribute('value',values[0])
-    }    
+    }  
+    
+    
 
+    function mostraFormulario(value){
+        var inputElementPagamento = document.getElementById('despesa');
+        //metodo para estar ou ser chamado no select dos predios
+        //objectivo: fazer o vormulario oculto para cadastrar as despesas aparecer
+        // e alterar os value do input codicoord para o codicoord do predio selecionado
+        
+    }
+
+     // pegar os apartamentos
+     function findCoordenadorDoPredioViaAjax(valor){ 
+           console.log('olaá');
+
+           const selectElement = document.getElementById('select-apartamentos');
+           const inputCoord = document.getElementById('coordenador');
+           fetch('/findcoordenador?id='+valor,{
+            }).then(response=>response.text()).then(data=>{       
+                //como trasformar string num objecto ou como receber um srrsy de objectos
+                console.log(data)
+                const objectos = JSON.parse(data);
+                console.log(objectos[0].n_codicoord)
+                inputCoord.value = objectos[0].n_codicoord;
+                
+            });       
+         }
+
+/*
+//Seleciona Despesas
+    function selectRowPagamento(row){
+        var inputElementPagamento = document.getElementById('despesa');
+        var inputElementCoordenador = document.getElementById('coordenador');
+        var table = document.getElementById('tableDespesas');
+        var rows = table.getElementsByTagName("tr");
+
+        for(var i = 0; i < rows.length;i++){
+            rows[i].classList.remove("selecionado");
+        }
+        row.classList.add("selecionado");
+
+        var cells = row.getElementsByTagName('td');
+        var values = [];
+        for(var j = 0; j < cells.length; j++){
+            values.push(cells[j].innerText);
+        }
+        console.log(values);
+        console.log(values[10]);
+         inputElementCoordenador.setAttribute('value',values[10])
+         inputElementPagamento.setAttribute('value',values[0])
+    }    
+*/
     </script>
 
 </html>

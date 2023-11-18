@@ -18,7 +18,8 @@
             <th>Moradores</th>
             <th>Taxas</th>
             <th>Pagamentos</th>
-            <th>Caixas</th>
+            <th>Caixas/Bancos</th>
+            <th>Despesas</th>
             <th>Bancos</th>
         </tr>
         
@@ -67,6 +68,12 @@
 
                 <td>
                 <form action="{{ route('caixas-index') }}" method="get">
+                    <input value="testar" type="submit"/>
+                </form>
+                </td>
+
+                <td>
+                <form action="{{ route('despesas-index') }}" method="get">
                     <input value="testar" type="submit"/>
                 </form>
                 </td>
