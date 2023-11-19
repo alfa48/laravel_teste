@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Centralidade;
+use App\Models\Despesa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -38,12 +39,12 @@ class DespesaController extends Controller
             
             //pegar os bancos do coordenador do predio
             //$idCoordenador = DB::select('select n_codicoord from trapredi where n_codipredi = ?', [0 => $idpredio]);
-            $bancosCoord = DB::select('select * from trabanco where n_codientid = ? and c_nomeentid = ? ', [0 => $idpredio, 1 =>'trapredi']);
+            $bancosCoord = DB::select('select * from trabanco where n_codientid = ? and c_nomeentid = ? ', [$idpredio, 1 =>'trapredi']);
            // var_dump($bancosCoord);
-            $despesasPredio = DB::select('select * from tradespe where n_codicoord = ?', [0 => $IDcoord]);
+            $despesasPredio = DB::select('select * from tradespe where n_codicoord = ?', [$IDcoord]);
            //pegar os pagamentos feitos por moradores do predio
 
-        }     
+       }     
 
         $codi_coord = $request->input("n_codicoord");
         $codi_pagam = $request->input("n_codipagam");
@@ -57,5 +58,20 @@ class DespesaController extends Controller
                                                 'centralidades'=>$centralidades,
                                                 'bancos' => $bancosCoord,
                                                 'despesasPredio' => $despesasPredio]);
+    }
+
+    public function store(Request $request){
+
+        $dadosDespesa = [
+            'n_codicoord' => $request->input('n_codicoord'),
+            'n_valodespe' => $request->input('n_valodespe'),
+            'c_objedespe' => $request->input('c_objedespe'),
+            'c_fontdespe' => $request->input('c_fontdespe'),
+            'd_dacrdespe' => $request->input('d_dacrdespe'),
+            'd_dasadespe' => $request->input('d_dasadespe')
+        ];
+       Despesa::insertGetId($dadosDespesa);
+        
+        //return redirect()->route('despesas-index');
     }
 }

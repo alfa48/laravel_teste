@@ -115,6 +115,7 @@ Route::prefix('caixas')->group(function(){
 /* DESPESAS */
 Route::prefix('despesas')->group(function(){
     Route::get('/',[DespesaController::class, 'index'])->name('despesas-index');
+    Route::post('/store',[DespesaController::class, 'store'])->name('despesas-store');
 });
 
 /* BANCO */

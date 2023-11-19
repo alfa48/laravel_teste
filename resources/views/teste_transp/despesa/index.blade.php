@@ -26,11 +26,12 @@
             <input type="submit" value="Pesquisar">
     </form>
     
-    <form class="form_despesa" action="{{ route('despesas-index') }}" method="get">
+    <form class="form_despesa" action="{{ route('despesas-store') }}" method="post">
             @csrf
             <h4>Criar despesa para o prédio</h4>
             <input type="text" name="c_objedespe" placeholder="objectivo dos valores" required>
-            <input type="number" name="n_valodespe" placeholder="valor" required>
+            <input pattern="[0-9]+(\.[0-9]+)?" name="n_valodespe" placeholder="valor" required>
+            <input type="date" name="d_dasadespe" placeholder="Data saque dos valores" required>
             <input type="number" class="oculto" value="" id="coordenador" name="n_codicoord" required>
             <select  class="hidden" name="c_fontdespe" required>
                 <option value="" >Seleciona a fonte da renda</option>
