@@ -15,6 +15,8 @@ class Divida extends Model
                             'c_descdivid',
                             'c_estadivid',
                             'n_valtdivid',
+                            'n_vapedivid',
+                            'n_vapadivid',
                             'n_prazdivid',
                             'n_vmuldivid',
                             'c_estadivid',

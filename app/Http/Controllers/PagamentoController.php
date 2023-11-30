@@ -28,7 +28,6 @@ class PagamentoController extends Controller
     public function store(Request $request){
         //$idDivida = 0;
         //TODO
-
         $dadosPagamento =[
             'n_codicoord' => $request->input('n_codicoord'),
             'n_valopagam' => $request->input('n_valopagam'),

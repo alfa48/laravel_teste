@@ -37,22 +37,21 @@
 <table id="tableDividas">
 
     <tr>
-        <th>ID dívida</th>
         <th>Descrição da dívida</th>
-        <th>Valor a pagar</th>
+        <th>Dívida</th>
+        <th>Valor pago</th>
+        <th>Valor pendente</th>
         <th>Estádo</th>
         <th>Prázo em dias</th>
         <th>Data da Criação</th>
         <th>Valor da Multa</th>
         <th>Data Para a contração da multa</th>
-        <th>Conta do apartamento</th>
-        <th>ID do coordenador</th>
-
+        
     </tr>
 
     @if (count($dividas) !== 0)
-        @foreach ($dividas as $divida)
-            <tr onclick="selectRow(this)">
+        @foreach ($dividas as $divida)       
+            <tr onclick="selectRowDivida(this)">
             </tr>
         @endforeach
         @else
@@ -66,8 +65,8 @@
             <input type="textarea" name="c_descpagam" placeholder="descrição">
             <input type="date" name="d_datapagam" placeholder="data de pagamento"/>
             <input pattern="[0-9]+(\.[0-9]+)?" name="n_valopagam" placeholder="volor do pagamento" required>
-            <input class="oculto" type="number" id="codidivida" name="n_codidivid" placeholder="ID da divida" required>
-            <input class="oculto" type="number" id="codicoordenador" name="n_codicoord" placeholder="ID do coordenador do prédio" required>
+            <input class="oculto" type="number" id="codidivida" name="n_codidivid" required>
+            <input class="oculto" type="number" id="codicoordenador" name="n_codicoord" required>
             
             <select name="c_formpagam" require>
                 <option value="cash">cash</option>

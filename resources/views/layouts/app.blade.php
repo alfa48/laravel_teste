@@ -241,7 +241,7 @@
            /*apartamentos com dividas: predio 2(A-entrada B) bloco 7(C) centralidade 1(Cequuele) */
 
            const tableElement = document.getElementById('tableDividas');
-           tableElement.innerHTML = "<tr><th>ID dívida</th><th>Descrição da dívida</th><th>Valor a pagar</th><th>Estádo</th><th>Prázo em dias</th><th>Data da Criação</th><th>Valor da Multa</th><th>Data Para a contração da multa</th><th>Conta do apartamento</th></th><th>ID coordenador</th></tr>";
+           tableElement.innerHTML = "<tr><th>Descrição da dívida</th><th>Valor a pagar</th><th>Valor pago</th><th>Valor pendente</th><th>Estádo</th><th>Prázo em dias</th><th>Data da Criação</th><th>Valor da Multa</th><th>Data Para a contração da multa</th></tr>";
           
            fetch('/finddividasapartamentos?id='+valor,{
               /*  
@@ -261,25 +261,42 @@
                 objectos.forEach((elemento)=>{
                    //Todo continua... preencher as tabelas apartir daqui~
                    const trElement = document.createElement("tr");
-                   trElement.setAttribute('onclick','selectRow(this)');
+                   trElement.setAttribute('onclick','selectRowDivida(this)');
                    trElement.value = elemento.n_codidivid;
                    //trElement.onclick = "selectRow(this)";
                    
                   // trElement.addEventListener(onclick,selectRow(trElement));
                     console.log(trElement.getAttributeNames);
 
-                   
-                   const tdElement1 = document.createElement('td');
-                   tdElement1.textContent = elemento.n_codidivid;
-                   trElement.appendChild(tdElement1);
 
+
+
+                    const tdElement0 = document.createElement('td');
+                   tdElement0.textContent = elemento.n_codidivid;
+                   tdElement0.setAttribute('class','oculto');
+                   trElement.appendChild(tdElement0);
+                   
+                   const tdElement01 = document.createElement('td');
+                   tdElement01.textContent = elemento.n_codicoord;
+                   tdElement01.setAttribute('class','oculto');
+                   trElement.appendChild(tdElement01);
+                   
                    const tdElement2 = document.createElement('td');
                    tdElement2.textContent = elemento.c_descdivid;
                    trElement.appendChild(tdElement2);
-
+                   
                    const tdElement3 = document.createElement('td');
                    tdElement3.textContent = elemento.n_valtdivid;
                    trElement.appendChild(tdElement3);
+
+                   const tdElement1 = document.createElement('td');
+                   tdElement1.textContent = elemento.n_vapadivid;
+                   trElement.appendChild(tdElement1);
+
+                    const tdElement = document.createElement('td');
+                   tdElement.textContent = elemento.n_vapedivid;
+                   trElement.appendChild(tdElement);
+
                    
                    const tdElement4 = document.createElement('td');
                    tdElement4.textContent = elemento.c_estadivid;
@@ -301,14 +318,6 @@
                    tdElement8.textContent = elemento.d_dcomdivid;
                    trElement.appendChild(tdElement8);
 
-                   const tdElement9 = document.createElement('td');
-                   tdElement9.textContent = elemento.n_codiconta;
-                   trElement.appendChild(tdElement9);
-
-                   const tdElement10 = document.createElement('td');
-                   tdElement10.textContent = elemento.n_codicoord;
-                   trElement.appendChild(tdElement10);
-
                    tableElement.appendChild(trElement);
 
                 });
@@ -317,9 +326,9 @@
          }
 
 //Seleciona dividas
-      function selectRow(row){
-        var inputElement = document.getElementById('codidivida');
-        var inputElement1 = document.getElementById('codicoordenador');
+      function selectRowDivida(row){
+        var tdElement = document.getElementById('codidivida');
+        var tdElement1 = document.getElementById('codicoordenador');
         var table = document.getElementById('tableDividas');
         var rows = table.getElementsByTagName("tr");
 
@@ -333,15 +342,15 @@
         for(var j = 0; j < cells.length; j++){
             values.push(cells[j].innerText);
         }
-        console.log(values);
-        inputElement.setAttribute('value',values[0])
-        inputElement1.setAttribute('value',values[9])
+        console.log("AQUI:"+values);
+        tdElement.setAttribute('value',values[0])
+        tdElement1.setAttribute('value',values[1])
     }
 
 //Seleciona Pagamentos
     function selectRowPagamento(row){
-        var inputElementPagamento = document.getElementById('pagamento');
-        var inputElementCoordenador = document.getElementById('coordenador');
+        var tdElementPagamento = document.getElementById('pagamento');
+        var tdElementCoordenador = document.getElementById('coordenador');
         var table = document.getElementById('tablePagamentos');
         var rows = table.getElementsByTagName("tr");
 
@@ -357,8 +366,8 @@
         }
         console.log(values);
         console.log(values[10]);
-         inputElementCoordenador.setAttribute('value',values[10])
-         inputElementPagamento.setAttribute('value',values[0])
+         tdElementCoordenador.setAttribute('value',values[10])
+         tdElementPagamento.setAttribute('value',values[0])
     }  
     
     

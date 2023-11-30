@@ -12,6 +12,7 @@ class Pagamento extends Model
     public $timestamps = false;
     protected $fillable = [
                             'n_valopagam',
+                            'n_vadipagam',
                             'c_descpagam',
                             'c_formpagam',
                             'c_bancpagam',
