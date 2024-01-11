@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Centralidade extends Model
 {
+    protected $connection = 'mysql';
     protected $table = 'tracentr';
     protected $primaryKey = 'n_codicentr';
     public $timestamps = false;

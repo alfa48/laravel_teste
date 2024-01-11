@@ -137,7 +137,7 @@ Route::get('/finddividasapartamentos', [UtilController::class, 'findDividasApart
 
 Route::get('/findcoordenador', [UtilController::class, 'findCoordenadorPredio']);
 
-
+Route::get('/espaco', [UtilController::class, 'ep']);
 
 Route::get('/find-centralidades', [PredioController::class, 'find']);
 

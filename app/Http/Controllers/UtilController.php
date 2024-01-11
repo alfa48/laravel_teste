@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EspPublico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use SebastianBergmann\Type\NullType;
@@ -117,6 +118,13 @@ class UtilController extends Controller
         $codicoord = DB::select('select n_codicoord from trapredi where n_codipredi = ?', [$id]);
         //var_dump($blocos);
         return $codicoord;   
+    }
+
+      
+    public function ep(){
+        //dd('Miseravel como estás?');
+        $eps = EspPublico::all();
+        return view('teste_transp.espaco.index',['eps' => $eps]);
     }
 
 }

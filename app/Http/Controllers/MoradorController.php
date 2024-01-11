@@ -20,7 +20,6 @@ class MoradorController extends Controller
         $apartamentos = Apartamento::all();
         $centralidades = Centralidade::all();
         return view('teste_transp.morador.create',['apartamentos' => $apartamentos],['centralidades'=> $centralidades]);
-
     }
     public function store(Request $request){
         $dadosMorador =[
